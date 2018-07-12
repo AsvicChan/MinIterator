@@ -16,10 +16,10 @@ int main()
 	vec.push_back(2);
 	vec.push_back(3);
 	vec.push_back(4);
-	FilteredForwardIterator<decltype(vec.begin()), bool(int)> first(vec.begin(),vec.end(), filter);
-	FilteredForwardIterator<decltype(vec.end()), bool(int)> second(vec.end(), vec.end(), filter);
+	FilteredIterator<decltype(vec.begin()), bool(int)> first(vec.begin(),vec.end(), filter);
+	FilteredIterator<decltype(vec.end()), bool(int)> second(vec.end(), vec.end(), filter);
 	second=std::min_element(first, second);
-	std::cout << *(*second);
+	std::cout << *second;
 	system("pause");
 	return 0;
 };

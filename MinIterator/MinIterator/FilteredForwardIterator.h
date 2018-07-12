@@ -2,7 +2,7 @@
 #include <iterator>
 
 template <typename Iterator, typename Filter>
-class FilteredForwardIterator : public Iterator
+class FilteredIterator : public Iterator
 {
 private:
 	Iterator iterator_;
@@ -10,7 +10,7 @@ private:
 	Filter* filter_;
 public:
 
-	FilteredForwardIterator(Iterator iterator, Iterator end, Filter filter) : iterator_(iterator), end_(end), filter_(filter) 
+	FilteredIterator(Iterator iterator, Iterator end, Filter filter) : iterator_(iterator), end_(end), filter_(filter) 
 	{
 		if (iterator_ == end_) return;
 		while (!filter_(*iterator_))
@@ -20,12 +20,12 @@ public:
 		}
 	};
 
-	FilteredForwardIterator(const FilteredForwardIterator& ffi) : iterator_(ffi.iterator_), end_(ffi.end_), filter_(ffi.filter_)
+	FilteredIterator(const FilteredIterator& ffi) : iterator_(ffi.iterator_), end_(ffi.end_), filter_(ffi.filter_)
 	{
 
 	};
 
-	FilteredForwardIterator operator=(const FilteredForwardIterator& rhs)
+	FilteredIterator operator=(const FilteredIterator& rhs)
 	{
 		iterator_ = rhs.iterator_;
 		end_ = rhs.end_;
@@ -33,17 +33,17 @@ public:
 		return *this;
 	};
 
-	~FilteredForwardIterator()
+	~FilteredIterator()
 	{
 
 	};
 
-	Iterator operator*() //works
+	decltype(*iterator_) operator*() //works
 	{
-		return iterator_;
+		return *iterator_;
 	};
 
-	FilteredForwardIterator& operator++() 
+	FilteredIterator& operator++() 
 	{
 		if (iterator_ == end_) return *this;
 		++iterator_;
@@ -56,24 +56,24 @@ public:
 		return *this;
 	};
 
-	bool operator==(const FilteredForwardIterator& rhs) const 
+	bool operator==(const FilteredIterator& rhs) const 
 	{
 		return iterator_ == rhs.iterator_;
 	};
 
-	bool operator!=(const FilteredForwardIterator& rhs) const 
+	bool operator!=(const FilteredIterator& rhs) const 
 	{
 		return iterator_ != rhs.iterator_;
 	};
 
-	FilteredForwardIterator operator++(int)
+	FilteredIterator operator++(int)
 	{
-		FilteredForwardIterator tmp(*this); 
+		FilteredIterator tmp(*this); 
 		operator++(); 
 		return tmp;
 	};
 
-	FilteredForwardIterator()
+	FilteredIterator()
 	{
 
 	};

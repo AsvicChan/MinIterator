@@ -22,11 +22,9 @@ public:
 
 	FilteredIterator(Iterator iterator, Iterator end, Filter filter) : iterator_(iterator), end_(end), filter_(filter) 
 	{
-		if (iterator_ == end_) return;
-		while (!filter_(*iterator_))
+		while ((iterator_ != end_) && (!filter_(*iterator_)))
 		{
 			++iterator_;
-			if (iterator_ == end_) return;
 		}
 	};
 
@@ -57,11 +55,9 @@ public:
 	{
 		if (iterator_ == end_) return *this;
 		++iterator_;
-		if (iterator_ == end_) return *this;
-		while (!filter_(*iterator_))
+		while ((iterator_ != end_) && (!filter_(*iterator_)))
 		{
 			++iterator_;
-			if (iterator_ == end_) return *this;
 		}
 		return *this;
 	};

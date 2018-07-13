@@ -1,8 +1,18 @@
 #pragma once
 #include <iterator>
 
+template <class Category, class T, class Distance = ptrdiff_t,
+	class Pointer = T * , class Reference = T & >
+	struct MyIterator {
+	typedef T         value_type;
+	typedef Distance  difference_type;
+	typedef Pointer   pointer;
+	typedef Reference reference;
+	typedef Category  iterator_category;
+};
+
 template <typename Iterator, typename Filter>
-class FilteredIterator : public Iterator
+class FilteredIterator : public MyIterator<std::forward_iterator_tag, Iterator>
 {
 private:
 	Iterator iterator_;
